@@ -1,0 +1,195 @@
+:root {
+  --fondo: #12141c;
+  --superficie: #1b1e2a;
+  --borde: #2c3040;
+  --texto: #e8eaf2;
+  --tenue: #8b90a4;
+  --musica: #f0a848;
+  --web: #6aa9f0;
+
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  line-height: 1.55;
+}
+
+.app {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.barra h1 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+
+.barra nav {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--borde);
+  padding-bottom: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.barra nav a {
+  color: var(--tenue);
+  text-decoration: none;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.barra nav a:hover {
+  color: var(--texto);
+}
+
+.barra nav a.active {
+  background: var(--superficie);
+  color: var(--texto);
+}
+
+.pagina h2 {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem;
+}
+
+.nota {
+  color: var(--tenue);
+  font-size: 0.9rem;
+  margin: 0 0 1.75rem;
+  max-width: 52ch;
+}
+
+.tarjeta {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-left: 3px solid var(--tenue);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.tarjeta--musica {
+  border-left-color: var(--musica);
+}
+
+.tarjeta--web {
+  border-left-color: var(--web);
+}
+
+.tarjeta h3 {
+  margin: 0.35rem 0 0.25rem;
+  font-size: 1.3rem;
+}
+
+.tarjeta p {
+  margin: 0;
+  color: var(--tenue);
+}
+
+.etiqueta {
+  font-size: 0.78rem;
+  color: var(--tenue);
+}
+
+.duracion,
+.url {
+  font-size: 0.88rem;
+  margin-top: 0.5rem !important;
+}
+
+.botones {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+button {
+  background: var(--texto);
+  color: var(--fondo);
+  border: none;
+  border-radius: 6px;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.92rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button.secundario {
+  background: transparent;
+  color: var(--texto);
+  border: 1px solid var(--borde);
+}
+
+button:disabled {
+  background: var(--superficie);
+  color: var(--tenue);
+  cursor: not-allowed;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--web);
+  outline-offset: 2px;
+}
+
+.aviso {
+  color: var(--tenue);
+  font-size: 0.88rem;
+  margin: -0.75rem 0 1.5rem;
+}
+
+.listado {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--borde);
+}
+
+.listado li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.75rem;
+  border-bottom: 1px solid var(--borde);
+  font-size: 0.93rem;
+}
+
+.listado li.activo {
+  background: var(--superficie);
+  border-radius: 4px;
+}
+
+.artista {
+  color: var(--tenue);
+  font-size: 0.86rem;
+}
+
+.extra {
+  margin-top: 2rem;
+}
+
+.extra summary {
+  color: var(--tenue);
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 480px) {
+  .listado li {
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+}
