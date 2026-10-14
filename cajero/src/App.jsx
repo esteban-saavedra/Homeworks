@@ -8,8 +8,6 @@ import {
 } from './datos.js'
 
 function App() {
-  // la cola va en useRef porque se modifica por dentro
-  // React no detecta esos cambios, entonces useState no servira de nada aqui
   const cola = useRef(null)
 
   if (cola.current === null) {
@@ -18,13 +16,9 @@ function App() {
       cola.current.encolar({ ...p, llegada: fechaLlegadaAleatoria() })
     )
   }
-  // la fila arranca con las personas de prueba
-  // a cada una el sistema le pega su hora de llegada aleatoria al momento de entrar
 
   const [version, setVersion] = useState(0)
   const refrescar = () => setVersion((v) => v + 1)
-  // este numero no significa nada, solo obliga a React a repintar
-  // le sumo uno cada vez que cambio algo dentro de la cola
 
   const [nombre, setNombre] = useState('')
   const [monto, setMonto] = useState('')
@@ -33,7 +27,6 @@ function App() {
 
   function crearPersona(evento) {
     evento.preventDefault()
-    // sin esto el formulario recarga la pagina entera y se pierde toda la fila
 
     if (nombre.trim() === '') {
       setError('Escribe el nombre de la persona.')
@@ -62,8 +55,6 @@ function App() {
     setAviso(persona.nombre + ' entro a la fila')
     refrescar()
   }
-  // valido antes de encolar porque si entra un monto vacio o texto
-  // la fila mostraria datos rotos y no habria como arreglarlo despues
 
   function atender() {
     if (cola.current.estaVacia()) {
@@ -75,8 +66,6 @@ function App() {
     setAviso(persona.nombre + ' retiro ' + formatearMonto(persona.monto))
     refrescar()
   }
-  // desencolar siempre saca al del frente, nunca se puede escoger a quien atender
-  // esa es justamente la regla de una cola
 
   const fila = cola.current.aArreglo()
   const porLlegada = cola.current.aArregloPorLlegada()
@@ -129,7 +118,7 @@ function App() {
 
             <button type="submit">Agregar a la fila</button>
           </form>
-          {/* uso onSubmit y no onClick para que tambien funcione dandole Enter */}
+          {}
         </section>
 
         {/* ESTADO DE LA COLA */}
@@ -165,7 +154,7 @@ function App() {
               </li>
             ))}
           </ol>
-          {/* esta es la fila tal cual, del frente hacia atras */}
+          {}
         </section>
 
         {/* ORDENADA POR LLEGADA */}
