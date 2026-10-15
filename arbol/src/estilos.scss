@@ -1,0 +1,295 @@
+$fondo: #eef1f3;
+$superficie: #ffffff;
+$borde: #dde3e7;
+$texto: #000000;
+$tenue: #090909;
+$error: #b4322c;
+$resalte: #e8edf1;
+
+$radio: 10px;
+$espacio: 1rem;
+$sangria: 1.25rem;
+$ancho-acceso: 400px;
+
+@mixin tarjeta-base {
+  background: $superficie;
+  border: 1px solid $borde;
+  border-radius: $radio;
+}
+
+@mixin fila-flex($separacion: 0.5rem) {
+  display: flex;
+  align-items: center;
+  gap: $separacion;
+}
+
+@mixin boton-plano {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+  background: $fondo;
+  color: $texto;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.barra-superior {
+  background: $texto;
+
+  .navbar-brand {
+    color: $superficie;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .sesion {
+    @include fila-flex(0.75rem);
+
+    span {
+      color: rgba($superficie, 0.8);
+      font-size: 0.88rem;
+    }
+  }
+}
+
+.pantalla-centrada {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $espacio * 1.5;
+}
+
+.tarjeta-acceso {
+  @include tarjeta-base;
+  width: 100%;
+  max-width: $ancho-acceso;
+
+  .titulo-acceso {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+
+  .sub-acceso {
+    color: $tenue;
+    font-size: 0.9rem;
+    margin: 0.2rem 0 $espacio * 1.5;
+  }
+
+  .pie-acceso {
+    text-align: center;
+    font-size: 0.88rem;
+    color: $tenue;
+    margin: $espacio 0 0;
+
+    a {
+      color: $texto;
+      font-weight: 600;
+    }
+  }
+}
+
+.contenedor-arbol {
+  padding-top: $espacio * 2;
+  padding-bottom: $espacio * 3;
+  max-width: 1120px;
+}
+
+.cabecera-arbol {
+  margin-bottom: $espacio * 1.5;
+
+  h1 {
+    font-size: 1.6rem;
+    font-weight: 650;
+    margin: 0;
+  }
+
+  p {
+    color: $tenue;
+    font-size: 0.92rem;
+    margin: 0.2rem 0 0;
+  }
+}
+
+.titulo-seccion {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 $espacio * 0.75;
+}
+
+.panel-crear,
+.panel-arbol {
+  @include tarjeta-base;
+}
+
+.cabecera-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid $borde;
+  padding-bottom: 0.7rem;
+  margin-bottom: $espacio;
+
+  .titulo-seccion {
+    margin: 0;
+  }
+}
+
+.tipo-estructura {
+  font-size: 0.74rem;
+  color: $tenue;
+}
+
+.destino {
+  background: $fondo;
+  border-radius: 8px;
+  border-left: 3px solid $texto;
+  padding: 0.75rem 0.9rem;
+  margin-bottom: $espacio;
+
+  .etiqueta {
+    font-size: 0.78rem;
+    color: $tenue;
+  }
+
+  .ruta {
+    font-size: 0.92rem;
+    margin-top: 0.2rem;
+    word-break: break-word;
+
+    .separador {
+      color: $tenue;
+      margin: 0 0.35rem;
+    }
+
+    .actual {
+      font-weight: 650;
+    }
+  }
+
+  .advertencia {
+    color: $error;
+    font-size: 0.82rem;
+    margin: 0.5rem 0 0;
+  }
+}
+
+.opciones-tipo {
+  @include fila-flex($espacio);
+}
+
+.ramas {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  &.raiz-lista {
+    border-top: 1px solid $borde;
+  }
+}
+
+.rama {
+  .fila {
+    @include fila-flex(0.5rem);
+    padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid $borde;
+    position: relative;
+
+    &:hover {
+      background: rgba($fondo, 0.6);
+
+      .acciones-nodo {
+        opacity: 1;
+      }
+    }
+
+    &.activa {
+      background: $resalte;
+
+      .nombre {
+        font-weight: 650;
+      }
+    }
+  }
+
+  .pliegue {
+    @include boton-plano;
+    width: 1.1rem;
+    flex-shrink: 0;
+    color: $tenue;
+    font-size: 0.7rem;
+    text-align: left;
+
+    &:disabled {
+      cursor: default;
+    }
+  }
+
+  .icono {
+    flex-shrink: 0;
+    font-size: 0.95rem;
+  }
+
+  .nombre {
+    @include boton-plano;
+    text-align: left;
+    font-size: 0.93rem;
+    flex-shrink: 1;
+    word-break: break-word;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .conteo {
+    font-size: 0.72rem;
+    color: $tenue;
+    background: $fondo;
+    border-radius: 999px;
+    padding: 0.05rem 0.45rem;
+    flex-shrink: 0;
+  }
+
+  .autor {
+    font-size: 0.76rem;
+    color: $tenue;
+    margin-left: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .acciones-nodo {
+    @include fila-flex(0.35rem);
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.15s;
+
+    @media (max-width: 820px) {
+      opacity: 1;
+    }
+  }
+
+  .form-renombrar {
+    @include fila-flex(0.35rem);
+    flex: 1;
+  }
+}
+
+.cargando {
+  color: $tenue;
+  font-size: 0.9rem;
+  margin-bottom: $espacio * 0.75;
+}
+
+.vacio {
+  color: $tenue;
+  font-size: 0.9rem;
+  margin: $espacio 0 0;
+}
