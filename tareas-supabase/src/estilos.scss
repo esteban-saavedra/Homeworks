@@ -1,0 +1,453 @@
+$fondo: #f4f6f8;
+$superficie: #ffffff;
+$borde: #e2e7ec;
+$texto: #000000;
+$tenue: #6c7f89;
+$error: #b4322c;
+$exito: #1f7a4d;
+$vivo: #2f9e68;
+
+$radio: 10px;
+$espacio: 1rem;
+$ancho-acceso: 400px;
+$foto: 72px;
+
+@mixin tarjeta-base {
+  background: $superficie;
+  border: 1px solid $borde;
+  border-radius: $radio;
+}
+
+@mixin fila-flex($separacion: 0.5rem) {
+  display: flex;
+  align-items: center;
+  gap: $separacion;
+}
+
+@mixin campo {
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: $texto;
+  background: $fondo;
+  border: 1px solid $borde;
+  border-radius: 6px;
+  padding: 0.55rem 0.7rem;
+  width: 100%;
+
+  &:focus {
+    outline: 2px solid $texto;
+    outline-offset: 1px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: $fondo;
+  color: $texto;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+input,
+textarea {
+  @include campo;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  background: $texto;
+  color: $superficie;
+  border: none;
+  border-radius: 6px;
+  padding: 0.55rem 0.95rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+
+  &.secundario {
+    background: transparent;
+    color: $texto;
+    border: 1px solid $borde;
+  }
+
+  &.peligro {
+    background: transparent;
+    color: $error;
+    border: 1px solid rgba($error, 0.35);
+  }
+
+  &.claro {
+    background: transparent;
+    color: $superficie;
+    border: 1px solid rgba($superficie, 0.35);
+    font-size: 0.85rem;
+    padding: 0.35rem 0.75rem;
+  }
+
+  &:disabled {
+    background: $fondo;
+    color: $tenue;
+    border: 1px solid $borde;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $texto;
+    outline-offset: 2px;
+  }
+}
+
+.barra {
+  @include fila-flex($espacio);
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background: $texto;
+  color: $superficie;
+  padding: 0.75rem 1.5rem;
+
+  .marca {
+    font-weight: 600;
+    font-size: 1.02rem;
+  }
+
+  .sesion {
+    @include fila-flex(0.75rem);
+    font-size: 0.88rem;
+
+    span {
+      color: rgba($superficie, 0.8);
+    }
+  }
+}
+
+.pantalla-centrada {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $espacio * 1.5;
+  color: $tenue;
+}
+
+.tarjeta-acceso {
+  @include tarjeta-base;
+  width: 100%;
+  max-width: $ancho-acceso;
+  padding: $espacio * 2;
+  color: $texto;
+
+  h1 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+
+  .sub {
+    color: $tenue;
+    font-size: 0.9rem;
+    margin: 0.2rem 0 $espacio * 1.5;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: $espacio;
+  }
+
+  button[type='submit'] {
+    width: 100%;
+    margin-top: 0.3rem;
+  }
+
+  .pie {
+    text-align: center;
+    font-size: 0.88rem;
+    color: $tenue;
+    margin: $espacio 0 0;
+
+    a {
+      color: $texto;
+      font-weight: 600;
+    }
+  }
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.88rem;
+  color: $tenue;
+}
+
+.alerta {
+  border-radius: 6px;
+  padding: 0.6rem 0.85rem;
+  margin-bottom: $espacio;
+  font-size: 0.89rem;
+  cursor: pointer;
+
+  &.error {
+    background: rgba($error, 0.08);
+    color: $error;
+    border: 1px solid rgba($error, 0.25);
+  }
+
+  &.aviso {
+    background: rgba($texto, 0.05);
+    color: $texto;
+    border: 1px solid $borde;
+  }
+}
+
+.contenido {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: $espacio * 2 $espacio * 1.25 $espacio * 3;
+}
+
+.cabecera-pagina {
+  @include fila-flex($espacio);
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: $espacio * 1.5;
+
+  h1 {
+    font-size: 1.6rem;
+    font-weight: 650;
+    margin: 0;
+  }
+
+  p {
+    color: $tenue;
+    font-size: 0.92rem;
+    margin: 0.2rem 0 0;
+  }
+}
+
+.estado {
+  @include fila-flex(0.4rem);
+  font-size: 0.8rem;
+  color: $tenue;
+  border: 1px solid $borde;
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  background: $superficie;
+
+  &::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: $tenue;
+  }
+
+  &.vivo {
+    color: $vivo;
+    border-color: rgba($vivo, 0.35);
+
+    &::before {
+      background: $vivo;
+    }
+  }
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: $espacio * 1.25;
+  align-items: start;
+
+  @media (max-width: 880px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.columna-izquierda {
+  display: flex;
+  flex-direction: column;
+  gap: $espacio * 1.25;
+}
+
+.tarjeta {
+  @include tarjeta-base;
+  padding: 1.15rem 1.25rem 1.35rem;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: $espacio;
+  }
+
+  &.vacia {
+    color: $tenue;
+    font-size: 0.93rem;
+  }
+}
+
+.cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  border-bottom: 1px solid $borde;
+  padding-bottom: 0.7rem;
+  margin-bottom: 0.9rem;
+
+  h2 {
+    font-size: 1.05rem;
+    margin: 0;
+  }
+}
+
+.tipo {
+  font-size: 0.74rem;
+  color: $tenue;
+  white-space: nowrap;
+}
+
+.panel-avatar {
+  .avatar-fila {
+    @include fila-flex($espacio);
+    align-items: flex-start;
+  }
+
+  .foto {
+    width: $foto;
+    height: $foto;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: $fondo;
+    border: 1px solid $borde;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 1.6rem;
+    font-weight: 650;
+    color: $tenue;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .avatar-datos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    min-width: 0;
+
+    strong {
+      font-size: 0.92rem;
+      word-break: break-word;
+    }
+  }
+}
+
+.titulo-grupo {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: $espacio * 1.25 0 0.6rem;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.tarea {
+  @include tarjeta-base;
+  padding: 0.9rem 1.1rem 1rem;
+  margin-bottom: 0.7rem;
+
+  .encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: $espacio;
+  }
+
+  .marca {
+    @include fila-flex(0.55rem);
+    flex-direction: row;
+    cursor: pointer;
+    color: $texto;
+
+    input {
+      width: auto;
+      margin: 0;
+      cursor: pointer;
+    }
+  }
+
+  .titulo-tarea {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .descripcion {
+    color: $tenue;
+    font-size: 0.89rem;
+    margin: 0.4rem 0 0.7rem 1.5rem;
+  }
+
+  .acciones {
+    @include fila-flex(0.5rem);
+    flex-wrap: wrap;
+    margin-top: 0.6rem;
+
+    button {
+      font-size: 0.83rem;
+      padding: 0.35rem 0.75rem;
+    }
+  }
+
+  &.hecha .titulo-tarea {
+    text-decoration: line-through;
+    color: $tenue;
+  }
+
+  &.editando {
+    border-color: $texto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+}
+
+.insignia {
+  font-size: 0.73rem;
+  border-radius: 999px;
+  padding: 0.12rem 0.6rem;
+  white-space: nowrap;
+
+  &.si {
+    background: rgba($exito, 0.1);
+    color: $exito;
+  }
+
+  &.no {
+    background: $fondo;
+    color: $tenue;
+  }
+}
+
+.texto-error {
+  color: $error;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.tenue {
+  color: $tenue;
+  font-size: 0.86rem;
+}
