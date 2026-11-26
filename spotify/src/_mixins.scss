@@ -1,0 +1,92 @@
+@use './variables' as *;
+
+@function espacio($multiplo) {
+  @return $base * $multiplo;
+}
+
+@mixin tarjeta {
+  background: $superficie;
+  border: 1px solid $borde;
+  border-radius: $radio;
+  padding: espacio(2.5) espacio(2.75) espacio(3);
+}
+
+@mixin fila($separacion: espacio(1)) {
+  display: flex;
+  align-items: center;
+  gap: $separacion;
+}
+
+@mixin columna($separacion: espacio(1)) {
+  display: flex;
+  flex-direction: column;
+  gap: $separacion;
+}
+
+@mixin campo {
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: $texto;
+  background: $fondo;
+  border: 1px solid $borde;
+  border-radius: $radio-chico;
+  padding: espacio(1.1) espacio(1.4);
+  width: 100%;
+
+  &::placeholder {
+    color: rgba($tenue, 0.7);
+  }
+
+  &:focus {
+    outline: 2px solid $acento;
+    outline-offset: 1px;
+  }
+}
+
+@mixin boton($relleno: $acento, $letra: $fondo) {
+  background: $relleno;
+  color: $letra;
+  border: none;
+  border-radius: 999px;
+  padding: espacio(1.1) espacio(2.2);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:hover {
+    filter: brightness(1.08);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $acento;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    background: $superficie-alta;
+    color: $tenue;
+    cursor: not-allowed;
+    filter: none;
+  }
+}
+
+@mixin etiqueta {
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: $tenue;
+}
+
+@mixin recorte($lineas: 1) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lineas;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@mixin en-movil {
+  @media (max-width: 860px) {
+    @content;
+  }
+}

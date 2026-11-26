@@ -1,0 +1,390 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: $fondo;
+  color: $texto;
+  font-family: $fuente;
+  line-height: 1.5;
+}
+
+input,
+select {
+  @include campo;
+}
+
+button {
+  @include boton;
+
+  &.secundario {
+    @include boton(transparent, $texto);
+    border: 1px solid $borde;
+  }
+}
+
+.panel {
+  max-width: $ancho;
+  margin: 0 auto;
+  padding: espacio(4) espacio(3) espacio(6);
+
+  @include en-movil {
+    padding: espacio(3) espacio(2) espacio(5);
+  }
+}
+
+.encabezado {
+  @include fila(espacio(2));
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: espacio(3);
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+
+    span {
+      color: $acento;
+    }
+  }
+
+  p {
+    @include etiqueta;
+    margin: espacio(0.4) 0 0;
+  }
+}
+
+.indicadores {
+  @include fila(espacio(1));
+  flex-wrap: wrap;
+}
+
+.indicador {
+  @include columna(0);
+  background: $superficie;
+  border: 1px solid $borde;
+  border-radius: $radio-chico;
+  padding: espacio(1) espacio(1.6);
+
+  strong {
+    font-size: 1.05rem;
+  }
+
+  span {
+    @include etiqueta;
+  }
+}
+
+.alerta {
+  border-radius: $radio-chico;
+  padding: espacio(1.2) espacio(1.7);
+  margin-bottom: espacio(2);
+  font-size: 0.9rem;
+
+  &.error {
+    background: rgba($error, 0.12);
+    color: $error;
+    border: 1px solid rgba($error, 0.3);
+  }
+
+  &.aviso {
+    background: $acento-suave;
+    color: $acento;
+    border: 1px solid rgba($acento, 0.3);
+  }
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: espacio(2.5);
+
+  @include en-movil {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tarjeta {
+  @include tarjeta;
+
+  &.ancha {
+    grid-column: 1 / -1;
+  }
+
+  form {
+    @include columna(espacio(1.6));
+  }
+}
+
+.cabecera {
+  @include fila(espacio(1.5));
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid $borde;
+  padding-bottom: espacio(1.4);
+  margin-bottom: espacio(2);
+
+  h2 {
+    font-size: 1.05rem;
+    margin: 0;
+  }
+
+  .estructura {
+    @include etiqueta;
+    color: $acento;
+    white-space: nowrap;
+  }
+}
+
+label {
+  @include columna(espacio(0.6));
+  @include etiqueta;
+}
+
+.controles {
+  @include fila(espacio(1.5));
+  align-items: flex-end;
+  flex-wrap: wrap;
+
+  .ancho-libre {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .angosto {
+    width: 110px;
+  }
+}
+
+.senal {
+  @include fila(espacio(0.7));
+  margin-top: espacio(1.6);
+  font-size: 0.86rem;
+
+  i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: $tenue;
+    flex-shrink: 0;
+  }
+
+  &.existe {
+    color: $acento;
+
+    i {
+      background: $acento;
+    }
+  }
+
+  &.no-existe {
+    color: $tenue;
+  }
+}
+
+.listado {
+  list-style: none;
+  margin: espacio(2) 0 0;
+  padding: 0;
+  @include columna(espacio(0.6));
+  max-height: 330px;
+  overflow-y: auto;
+}
+
+.fila-cancion {
+  @include fila(espacio(1.4));
+  width: 100%;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radio-chico;
+  padding: espacio(1) espacio(1.2);
+  text-align: left;
+  color: $texto;
+  font-weight: 400;
+  font-size: 0.93rem;
+
+  &:hover {
+    background: $superficie-alta;
+    filter: none;
+  }
+
+  &.activa {
+    background: $acento-suave;
+    border-color: rgba($acento, 0.35);
+  }
+
+  .puesto {
+    width: 22px;
+    flex-shrink: 0;
+    text-align: right;
+    color: $tenue;
+    font-size: 0.82rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .portada {
+    width: $portada;
+    height: $portada;
+    flex-shrink: 0;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .meta {
+    @include columna(0);
+    flex: 1;
+    min-width: 0;
+
+    strong {
+      @include recorte;
+      font-weight: 600;
+    }
+
+    span {
+      @include etiqueta;
+      @include recorte;
+    }
+  }
+
+  .cifra {
+    @include columna(0);
+    align-items: flex-end;
+    flex-shrink: 0;
+
+    strong {
+      font-size: 0.9rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    span {
+      @include etiqueta;
+    }
+  }
+}
+
+.medidor {
+  width: 90px;
+  height: 6px;
+  flex-shrink: 0;
+  background: $superficie-alta;
+  border-radius: 3px;
+  overflow: hidden;
+
+  i {
+    display: block;
+    height: 100%;
+    background: $acento;
+  }
+
+  @include en-movil {
+    display: none;
+  }
+}
+
+.destacado {
+  @include fila(espacio(1.5));
+  background: $superficie-alta;
+  border-radius: $radio-chico;
+  padding: espacio(1.5);
+  margin-bottom: espacio(2);
+
+  .portada {
+    width: 56px;
+    height: 56px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  .meta {
+    @include columna(0);
+    min-width: 0;
+
+    strong {
+      font-size: 1.1rem;
+    }
+
+    span {
+      @include etiqueta;
+    }
+  }
+}
+
+.grupo-relacion {
+  margin-bottom: espacio(2);
+
+  h3 {
+    @include etiqueta;
+    margin: 0 0 espacio(1);
+  }
+}
+
+.fichas {
+  @include fila(espacio(0.8));
+  flex-wrap: wrap;
+}
+
+.ficha {
+  @include fila(espacio(0.7));
+  background: $superficie-alta;
+  border: 1px solid $borde;
+  border-radius: 999px;
+  padding: espacio(0.7) espacio(1.4);
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: $texto;
+
+  &:hover {
+    border-color: rgba($acento, 0.5);
+    filter: none;
+  }
+
+  i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &.lejana {
+    opacity: 0.75;
+  }
+}
+
+.vacio {
+  color: $tenue;
+  font-size: 0.9rem;
+  padding: espacio(2);
+  text-align: center;
+}
+
+.pie {
+  @include etiqueta;
+  margin: espacio(2) 0 0;
+  max-width: 62ch;
+}
+
+.campos-pareados {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: espacio(1.6);
+
+  @include en-movil {
+    grid-template-columns: 1fr;
+  }
+}
+
